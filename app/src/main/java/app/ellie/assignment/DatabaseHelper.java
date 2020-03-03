@@ -2,6 +2,7 @@ package app.ellie.assignment;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
@@ -42,5 +43,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         records.put(COL3, email);
 
        return db.insert(TABLENAME, null, records);
+    }
+
+    public Cursor ReadData(){
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor dataToRead = db.rawQuery("SELECT * FROM " + TABLENAME, null);
+        return dataToRead;
+
     }
 }

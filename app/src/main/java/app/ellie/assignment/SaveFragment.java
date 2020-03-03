@@ -1,5 +1,7 @@
 package app.ellie.assignment;
 
+import android.app.AlertDialog;
+import android.database.Cursor;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -20,26 +22,32 @@ import java.util.List;
 
 import static app.ellie.assignment.MainActivity.fragmentManager;
 
+
+
 public class SaveFragment extends Fragment  implements AdapterView.OnItemSelectedListener{
     private final String EMAIL_PATTERN = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
     DatabaseHelper mydb;
     EditText sName, password, email;
-    private Button button, save;
+    private Button button, save, viewBtn;
     private Spinner spinner1, spinner2;
     private DatabaseHelper db;
     private boolean isValid = true;
 
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+
         // Inflate the layout for this fragment
         final View view = inflater.inflate(R.layout.fragment_save, container, false);
 
 
 
-
         mydb = new DatabaseHelper(getContext());
         button = view.findViewById(R.id.save);
+        viewBtn = view.findViewById(R.id.readBtn);
+        ReadData();
 
         sName = view.findViewById(R.id.name);
         password = view.findViewById(R.id.password);
@@ -129,4 +137,32 @@ public class SaveFragment extends Fragment  implements AdapterView.OnItemSelecte
     public void onNothingSelected(AdapterView<?> parent) {
 
     }
+    public void ReadData(){
+        viewBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Cursor results = mydb.ReadData();
+                if (results.getCount() == 0){
+                    showMessage("Error", "Nothing to show");
+                }
+                StringBuffer sb = new StringBuffer();
+                while (results.moveToNext()){
+                    sb.append("ReadNo : "+ results.getString(0) + "\n" );
+                    sb.append("Name : "+ results.getString(1) + "\n" );
+                    sb.append("Password : "+ results.getString(2) + "\n" );
+                    sb.append("Email : "+ results.getString(3) + "\n\n" );
+                }
+                showMessage("Students Record", sb.toString());
+            }
+        });
+    }
+
+    public void showMessage(String title, String message){
+        AlertDialog.Builder builder = new AlertDialog.Builder((getActivity()));
+        builder.setCancelable(true);
+        builder.setTitle(title);
+        builder.setMessage(message);
+        builder.show();
+    }
+
 }

@@ -15,10 +15,11 @@
             android:id="@+id/save"
             android:layout_width="134dp"
             android:layout_height="50dp"
-            android:layout_marginBottom="31dp"
+            android:layout_marginBottom="28dp"
             android:text="ADD"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.057"
             app:layout_constraintStart_toStartOf="parent" />
 
         <EditText
@@ -160,6 +161,18 @@
             app:layout_constraintEnd_toStartOf="@+id/session_spinner"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/session_spinner" />
+
+        <Button
+            android:id="@+id/readBtn"
+            android:layout_width="131dp"
+            android:layout_height="46dp"
+            android:layout_marginEnd="40dp"
+            android:layout_marginBottom="32dp"
+            android:text="Read"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toEndOf="@+id/save" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
