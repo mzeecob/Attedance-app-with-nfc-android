@@ -1,4 +1,4 @@
-package app.ellie.assignment;
+package app.regis.assignment;
 
 import org.junit.Test;
 
